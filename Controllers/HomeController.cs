@@ -13,6 +13,7 @@ namespace WebProgramlamaProje.Controllers
             _logger = logger;
         }
 
+        //G19
         public IActionResult Index()
         {
             return View();
