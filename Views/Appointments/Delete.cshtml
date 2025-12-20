@@ -1,0 +1,98 @@
+@model WebProgramlamaProje.Models.Appointment
+
+@{
+    ViewData["Title"] = "Randevu İptali";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card border-danger glow-danger-card">
+            <div class="card-header bg-danger text-white py-4 text-center">
+                <div class="header-icon mb-2">⚠️</div>
+                <h3 class="mb-0">Randevu İptali</h3>
+            </div>
+            
+            <div class="card-body p-4">
+                <div class="alert alert-warning border-0 mb-4">
+                    <strong>Dikkat!</strong> Bu randevuyu iptal etmek istediğinizden emin misiniz? Bu işlem geri alınamaz.
+                </div>
+                
+                <div class="appointment-summary p-4 rounded mb-4">
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted uppercase-tag">Eğitmen</div>
+                        <div class="col-sm-8 fw-bold text-cyan">@Model.Trainer?.Name</div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted uppercase-tag">Hizmet</div>
+                        <div class="col-sm-8">@Model.Service?.Name</div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted uppercase-tag">Tarih & Saat</div>
+                        <div class="col-sm-8">@Model.AppointmentDate.ToString("dd MMMM yyyy, HH:mm")</div>
+                    </div>
+                    
+                    @if (User.IsInRole("Admin") && Model.ApplicationUser != null)
+                    {
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted uppercase-tag">Üye</div>
+                            <div class="col-sm-8">@Model.ApplicationUser.FullName</div>
+                        </div>
+                    }
+                </div>
+                
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn btn-danger btn-lg py-3 fw-bold">
+                            <span class="me-2">🗑️</span> Randevuyu İptal Et
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary py-2">
+                            Vazgeç, Listeye Dön
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .glow-danger-card {
+        border: 1px solid rgba(255, 0, 110, 0.3);
+        background: var(--surface-primary);
+        box-shadow: 0 10px 30px rgba(255, 0, 110, 0.15);
+    }
+
+    .appointment-summary {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .uppercase-tag {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .text-cyan {
+        color: var(--neon-cyan);
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #ff006e, #ff4d6d);
+        border: none;
+        box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+    }
+
+    .btn-danger:hover {
+        background: linear-gradient(135deg, #ff4d6d, #ff006e);
+        transform: translateY(-2px);
+        box-shadow: 0 0 25px rgba(255, 0, 110, 0.5);
+    }
+
+    .header-icon {
+        font-size: 2.5rem;
+    }
+</style>

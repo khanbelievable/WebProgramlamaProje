@@ -2,37 +2,399 @@
     ViewData["Title"] = "Ana Sayfa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Hoş Geldiniz</h1>
-    <p>Premium Fitness Deneyimine Hazır Mısınız?</p>
+<div class="hero-container">
+    <div class="row g-0 min-vh-75">
+        <!-- Left/Center Content Area -->
+        <div class="col-lg-8">
+            <div class="hero-content-section">
+                <!-- Main Hero Text -->
+                <div class="hero-text-block animate-slide-in">
+                    <div class="hero-badge mb-3">
+                        <span class="badge-pulse"></span>
+                        Türkiye'nin En Gelişmiş Fitness Platformu
+                    </div>
+                    
+                    <h1 class="display-3 fw-bold mb-4">
+                        <span class="gradient-text">FitZone Pro</span><br />
+                        Fitness Yolculuğunuz<br />
+                        Burada Başlıyor
+                    </h1>
+                    
+                    <p class="lead-text mb-5">
+                        Yapay zeka destekli antrenman planları, uzman eğitmenler ve modern fitness salonları ile hedeflerinize ulaşın. 
+                        Her seviyeden sporcu için özel olarak tasarlanmış kapsamlı yönetim sistemi.
+                    </p>
+                </div>
+
+                <!-- Feature Cards Grid -->
+                <div class="feature-cards-grid">
+                    <div class="feature-mini-card">
+                        <div class="feature-icon">🏋️</div>
+                        <div class="feature-content">
+                            <h4>Modern Salonlar</h4>
+                            <p>Son teknoloji ekipmanlarla donatılmış fitness merkezleri</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-mini-card">
+                        <div class="feature-icon">💪</div>
+                        <div class="feature-content">
+                            <h4>Uzman Eğitmenler</h4>
+                            <p>Sertifikalı ve deneyimli profesyonel kadro</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-mini-card">
+                        <div class="feature-icon">🤖</div>
+                        <div class="feature-content">
+                            <h4>AI Antrenman</h4>
+                            <p>Kişiselleştirilmiş yapay zeka destekli programlar</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-mini-card">
+                        <div class="feature-icon">📅</div>
+                        <div class="feature-content">
+                            <h4>Kolay Randevu</h4>
+                            <p>Hızlı ve pratik online rezervasyon sistemi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section mt-5">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Aktif Üye</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Profesyonel Eğitmen</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Şehir</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Destek</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Vertical Action Panel -->
+        <div class="col-lg-4">
+            <div class="action-panel-vertical">
+                <div class="action-panel-header mb-4">
+                    <h3 class="panel-title">Hızlı Erişim</h3>
+                    <p class="panel-subtitle">Platformu keşfetmeye başlayın</p>
+                </div>
+
+                <div class="action-buttons-stack">
+                    <a asp-controller="Gyms" asp-action="Index" class="action-card-btn">
+                        <div class="action-card-icon">🏋️</div>
+                        <div class="action-card-content">
+                            <h4>Salonlarımız</h4>
+                            <p>Tüm fitness merkezlerimizi inceleyin</p>
+                        </div>
+                        <div class="action-card-arrow">→</div>
+                    </a>
+
+                    <a asp-controller="Trainers" asp-action="Index" class="action-card-btn">
+                        <div class="action-card-icon">💪</div>
+                        <div class="action-card-content">
+                            <h4>Eğitmenlerimiz</h4>
+                            <p>Uzman kadromuzla tanışın</p>
+                        </div>
+                        <div class="action-card-arrow">→</div>
+                    </a>
+
+                    <a asp-controller="Home" asp-action="AISuggestions" class="action-card-btn highlight">
+                        <div class="action-card-icon">🤖</div>
+                        <div class="action-card-content">
+                            <h4>AI Antrenman Planı</h4>
+                            <p>Size özel program oluşturun</p>
+                        </div>
+                        <div class="action-card-arrow">→</div>
+                    </a>
+
+                    <a asp-controller="Appointments" asp-action="Create" class="action-card-btn">
+                        <div class="action-card-icon">📅</div>
+                        <div class="action-card-content">
+                            <h4>Randevu Al</h4>
+                            <p>Hemen rezervasyon yapın</p>
+                        </div>
+                        <div class="action-card-arrow">→</div>
+                    </a>
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Account" asp-action="Register" class="action-card-btn accent">
+                            <div class="action-card-icon">✨</div>
+                            <div class="action-card-content">
+                                <h4>Üye Ol</h4>
+                                <p>Hemen başlayın, ücretsiz!</p>
+                            </div>
+                            <div class="action-card-arrow">→</div>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row mt-5">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <h5 class="card-title">Spor Salonlarımız</h5>
-                <p class="card-text">En yakın salonu bulun ve hemen başlayın.</p>
-                <a asp-controller="Gyms" asp-action="Index" class="btn btn-primary">Salonları Gör</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <h5 class="card-title">Eğitmenlerimiz</h5>
-                <p class="card-text">Uzman eğitmenlerimizle hedeflerinize ulaşın.</p>
-                <a asp-controller="Trainers" asp-action="Index" class="btn btn-primary">Eğitmenleri Gör</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <h5 class="card-title">Randevu Al</h5>
-                <p class="card-text">Hemen uygun bir saat seçin ve yerinizi ayırtın.</p>
-                <a asp-controller="Appointments" asp-action="Index" class="btn btn-success">Randevu Al</a>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Additional CSS for this page -->
+<style>
+    .hero-container {
+        padding: 2rem 0;
+    }
+
+    .min-vh-75 {
+        min-height: 75vh;
+    }
+
+    .hero-content-section {
+        padding: 2rem 3rem 2rem 1rem;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.5rem 1.5rem;
+        background: rgba(0, 245, 255, 0.15);
+        border: 1px solid rgba(0, 245, 255, 0.3);
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--neon-cyan);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .badge-pulse {
+        width: 8px;
+        height: 8px;
+        background: var(--neon-cyan);
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+        box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .lead-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-secondary-color);
+        max-width: 600px;
+    }
+
+    /* Feature Mini Cards */
+    .feature-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .feature-mini-card {
+        display: flex;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: rgba(36, 40, 66, 0.4);
+        border: 1px solid rgba(0, 245, 255, 0.1);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .feature-mini-card:hover {
+        background: rgba(36, 40, 66, 0.6);
+        border-color: rgba(0, 245, 255, 0.3);
+        transform: translateX(5px);
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+        flex-shrink: 0;
+    }
+
+    .feature-content h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-primary-color);
+        margin-bottom: 0.25rem;
+    }
+
+    .feature-content p {
+        font-size: 0.85rem;
+        color: var(--text-muted-color);
+        margin: 0;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        display: flex;
+        gap: 2rem;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(0, 245, 255, 0.1);
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--neon-cyan), var(--power-green));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Right Vertical Action Panel */
+    .action-panel-vertical {
+        position: sticky;
+        top: 2rem;
+        padding: 1.5rem;
+        margin-left: 1rem;
+        height: fit-content;
+    }
+
+    .panel-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--neon-cyan);
+        margin-bottom: 0.5rem;
+    }
+
+    .panel-subtitle {
+        font-size: 0.9rem;
+        color: var(--text-muted-color);
+        margin: 0;
+    }
+
+    .action-buttons-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .action-card-btn {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.25rem;
+        background: linear-gradient(135deg, rgba(36, 40, 66, 0.8), rgba(45, 50, 80, 0.8));
+        border: 1px solid rgba(0, 245, 255, 0.2);
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .action-card-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .action-card-btn:hover::before {
+        left: 100%;
+    }
+
+    .action-card-btn:hover {
+        transform: translateX(8px);
+        border-color: var(--neon-cyan);
+        box-shadow: 0 4px 20px rgba(0, 245, 255, 0.2);
+    }
+
+    .action-card-btn.highlight {
+        background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), rgba(255, 0, 170, 0.15));
+        border-color: var(--neon-cyan);
+    }
+
+    .action-card-btn.accent {
+        background: linear-gradient(135deg, rgba(255, 0, 170, 0.2), rgba(0, 245, 255, 0.2));
+        border-color: var(--neon-magenta);
+    }
+
+    .action-card-icon {
+        font-size: 2rem;
+        flex-shrink: 0;
+    }
+
+    .action-card-content {
+        flex: 1;
+    }
+
+    .action-card-content h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-primary-color);
+        margin-bottom: 0.25rem;
+    }
+
+    .action-card-content p {
+        font-size: 0.8rem;
+        color: var(--text-secondary-color);
+        margin: 0;
+    }
+
+    .action-card-arrow {
+        font-size: 1.5rem;
+        color: var(--neon-cyan);
+        transition: transform 0.3s ease;
+    }
+
+    .action-card-btn:hover .action-card-arrow {
+        transform: translateX(5px);
+    }
+
+    /* Responsive */
+    @@media (max-width: 991px) {
+        .hero-content-section {
+            padding: 2rem 1rem;
+        }
+
+        .action-panel-vertical {
+            margin-left: 0;
+            margin-top: 2rem;
+            position: static;
+        }
+
+        .feature-cards-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .stats-section {
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            flex: 1 1 40%;
+        }
+    }
+</style>

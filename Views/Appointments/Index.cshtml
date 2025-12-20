@@ -4,51 +4,228 @@
     ViewData["Title"] = "Randevularım";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Randevular</h1>
-    <a asp-action="Create" class="btn btn-success">Yeni Randevu Al</a>
+<div class="page-header mb-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="display-5 fw-bold gradient-text mb-2">Randevularım</h1>
+            <p class="lead text-secondary">Aktif ve geçmiş randevularınız</p>
+        </div>
+        <a asp-action="Create" class="btn btn-success">
+            <span class="me-2">➕</span> Yeni Randevu Oluştur
+        </a>
+    </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-hover align-middle">
-        <thead class="table-light">
-            <tr>
-                @if (User.IsInRole("Admin")) {
-                    <th>Üye</th>
-                }
-                <th>Eğitmen</th>
-                <th>Hizmet</th>
-                <th>Tarih</th>
-                <th>Durum</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model) {
-                <tr>
-                    @if (User.IsInRole("Admin")) {
-                        <td>@item.ApplicationUser?.FullName</td>
-                    }
-                    <td>@item.Trainer?.Name</td>
-                    <td>@item.Service?.Name</td>
-                    <td>@item.AppointmentDate.ToString("dd.MM.yyyy HH:mm")</td>
-                    <td>
-                        @if (item.IsConfirmed) {
-                            <span class="badge bg-success">Onaylandı</span>
-                        } else {
-                            <span class="badge bg-warning text-dark">Beklemede</span>
-                        }
-                    </td>
-                    <td>
-                        @if (User.IsInRole("Admin") && !item.IsConfirmed) {
-                            <form asp-action="Confirm" asp-route-id="@item.Id" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-sm btn-outline-success">Onayla</button>
-                            </form>
-                        }
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">İptal Et</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+@if (Model.Any())
+{
+    <div class="row g-4">
+        @foreach (var appointment in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card appointment-card @(appointment.IsConfirmed ? "confirmed" : "pending")">
+                    <div class="card-header">
+                        <div class="status-badge @(appointment.IsConfirmed ? "status-confirmed" : "status-pending")">
+                            @if (appointment.IsConfirmed)
+                            {
+                                <span>✅ Onaylandı</span>
+                            }
+                            else
+                            {
+                                <span>⏳ Beklemede</span>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="appointment-info">
+                            <div class="info-row">
+                                <span class="info-icon">💪</span>
+                                <div>
+                                    <small class="text-muted">Eğitmen</small>
+                                    <p class="mb-0 fw-bold">@appointment.Trainer?.Name</p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-row">
+                                <span class="info-icon">⚙️</span>
+                                <div>
+                                    <small class="text-muted">Hizmet</small>
+                                    <p class="mb-0">@appointment.Service?.Name</p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-row">
+                                <span class="info-icon">📅</span>
+                                <div>
+                                    <small class="text-muted">Tarih & Saat</small>
+                                    <p class="mb-0">@appointment.AppointmentDate.ToString("dd MMMM yyyy, HH:mm")</p>
+                                </div>
+                            </div>
+                            
+                            @if (!string.IsNullOrEmpty(appointment.Notes))
+                            {
+                                <div class="info-row">
+                                    <span class="info-icon">📝</span>
+                                    <div>
+                                        <small class="text-muted">Notlar</small>
+                                        <p class="mb-0">@appointment.Notes</p>
+                                    </div>
+                                </div>
+                            }
+                            
+                            @if (User.IsInRole("Admin") && appointment.ApplicationUser != null)
+                            {
+                                <div class="info-row">
+                                    <span class="info-icon">👤</span>
+                                    <div>
+                                        <small class="text-muted">Üye</small>
+                                        <p class="mb-0">@appointment.ApplicationUser.FullName</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="d-flex gap-2">
+                            @if (User.IsInRole("Admin") && !appointment.IsConfirmed)
+                            {
+                                <form asp-action="Confirm" asp-route-id="@appointment.Id" method="post" class="flex-fill">
+                                    <button type="submit" class="btn btn-success btn-sm w-100">
+                                        <span class="me-1">✅</span> Onayla
+                                    </button>
+                                </form>
+                            }
+                            
+                            <a asp-action="Delete" asp-route-id="@appointment.Id" class="btn btn-danger btn-sm flex-fill">
+                                <span class="me-1">🗑️</span> İptal Et
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="empty-state text-center py-5">
+        <div class="empty-icon mb-3">📅</div>
+        <h3 class="text-muted">Henüz Randevunuz Yok</h3>
+        <p class="text-secondary mb-4">İlk randevunuzu oluşturmak için yukarıdaki butonu kullanın.</p>
+        <a asp-action="Create" class="btn btn-success btn-lg">
+            <span class="me-2">➕</span> Randevu Oluştur
+        </a>
+    </div>
+}
+
+<style>
+    .page-header {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .appointment-card {
+        border: 1px solid rgba(0, 245, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .appointment-card.confirmed {
+        border-color: rgba(0, 255, 136, 0.3);
+    }
+
+    .appointment-card.pending {
+        border-color: rgba(255, 234, 0, 0.3);
+    }
+
+    .appointment-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 245, 255, 0.2);
+    }
+
+    .card-header {
+        background: transparent;
+        border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+        padding: 1rem;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .status-confirmed {
+        background: rgba(0, 255, 136, 0.15);
+        color: var(--power-green);
+        border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .status-pending {
+        background: rgba(255, 234, 0, 0.15);
+        color: var(--neon-yellow);
+        border: 1px solid rgba(255, 234, 0, 0.3);
+    }
+
+    .appointment-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .info-row {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: rgba(0, 245, 255, 0.05);
+        border-radius: 8px;
+        border-left: 3px solid rgba(0, 245, 255, 0.3);
+    }
+
+    .info-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .info-row small {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.25rem;
+    }
+
+    .info-row p {
+        color: var(--text-primary-color);
+        font-size: 0.95rem;
+    }
+
+    .card-footer {
+        background: transparent;
+        border-top: 1px solid rgba(0, 245, 255, 0.1);
+        padding: 1rem;
+    }
+
+    .empty-state {
+        background: rgba(36, 40, 66, 0.3);
+        border: 2px dashed rgba(0, 245, 255, 0.2);
+        border-radius: 12px;
+        margin-top: 3rem;
+    }
+
+    .empty-icon {
+        font-size: 5rem;
+        opacity: 0.3;
+    }
+</style>

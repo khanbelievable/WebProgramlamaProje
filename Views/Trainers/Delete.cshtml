@@ -1,0 +1,109 @@
+@model WebProgramlamaProje.Models.Trainer
+
+@{
+    ViewData["Title"] = "Eğitmen Sil";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h3 class="mb-0">⚠️ Eğitmen Silme Onayı</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <strong>Dikkat!</strong> Bu eğitmeni silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.
+                </div>
+                
+                <div class="trainer-preview text-center mb-4">
+                    <div class="avatar-circle-medium mx-auto mb-3">
+                        <span class="avatar-icon">👤</span>
+                    </div>
+                    <h4 class="text-danger mb-2">@Model.Name</h4>
+                    <div class="specialty-badge mb-3">@Model.Specialty</div>
+                </div>
+                
+                <div class="detail-rows">
+                    <div class="detail-row">
+                        <strong>🏋️ Salon:</strong>
+                        <span>@Model.Gym?.Name</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <strong>📝 Açıklama:</strong>
+                        <span>@Model.Description</span>
+                    </div>
+                </div>
+                
+                <form asp-action="Delete" method="post" class="mt-4">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-danger flex-fill">
+                            <span class="me-2">🗑️</span> Evet, Sil
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary flex-fill">
+                            <span class="me-2">↩️</span> İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .trainer-preview {
+        padding: 1.5rem;
+        background: rgba(255, 0, 110, 0.05);
+        border-radius: 8px;
+    }
+
+    .avatar-circle-medium {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255, 0, 110, 0.2), rgba(255, 0, 170, 0.2));
+        border: 3px solid rgba(255, 0, 110, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .avatar-circle-medium .avatar-icon {
+        font-size: 2.5rem;
+    }
+
+    .specialty-badge {
+        display: inline-block;
+        background: rgba(255, 0, 110, 0.15);
+        color: var(--neon-danger);
+        padding: 0.35rem 1.5rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 0, 110, 0.3);
+    }
+
+    .detail-rows {
+        margin-top: 1.5rem;
+    }
+
+    .detail-row {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-row strong {
+        display: inline-block;
+        min-width: 130px;
+        color: var(--text-primary-color);
+    }
+
+    .detail-row span {
+        color: var(--text-secondary-color);
+    }
+</style>

@@ -6,9 +6,8 @@ namespace WebProgramlamaProje.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [Display(Name = "Üye")]
-        public string ApplicationUserId { get; set; }
+        public string? ApplicationUserId { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
 
         [Required]

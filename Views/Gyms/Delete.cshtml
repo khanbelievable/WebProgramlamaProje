@@ -1,0 +1,74 @@
+@model WebProgramlamaProje.Models.Gym
+
+@{
+    ViewData["Title"] = "Salon Sil";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h3 class="mb-0">⚠️ Salon Silme Onayı</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <strong>Dikkat!</strong> Bu salonu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.
+                </div>
+                
+                <div class="gym-preview">
+                    <h4 class="text-danger mb-3">🏋️ @Model.Name</h4>
+                    
+                    <div class="detail-row">
+                        <strong>📍 Adres:</strong>
+                        <span>@Model.Address</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <strong>📞 Telefon:</strong>
+                        <span>@Model.PhoneNumber</span>
+                    </div>
+                </div>
+                
+                <form asp-action="Delete" method="post" class="mt-4">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-danger flex-fill">
+                            <span class="me-2">🗑️</span> Evet, Sil
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary flex-fill">
+                            <span class="me-2">↩️</span> İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .gym-preview {
+        padding: 1.5rem;
+        background: rgba(255, 0, 110, 0.05);
+        border-radius: 8px;
+        border-left: 4px solid var(--neon-danger);
+    }
+
+    .detail-row {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-row strong {
+        display: inline-block;
+        min-width: 120px;
+        color: var(--text-primary-color);
+    }
+
+    .detail-row span {
+        color: var(--text-secondary-color);
+    }
+</style>
