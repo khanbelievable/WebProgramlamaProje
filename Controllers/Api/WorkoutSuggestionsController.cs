@@ -3,8 +3,8 @@ using WebProgramlamaProje.Services;
 
 namespace WebProgramlamaProje.Controllers.Api
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class WorkoutSuggestionsController : ControllerBase
     {
         private readonly IAISuggestionService _aiService;
@@ -15,12 +15,12 @@ namespace WebProgramlamaProje.Controllers.Api
         }
 
         [HttpGet]
-        public IActionResult GetSuggestion(string goal, string level = "beginner")
+        public async Task<IActionResult> GetSuggestion(string goal, string level = "beginner", string notes = "")
         {
             if (string.IsNullOrEmpty(goal)) return BadRequest("Hedef (goal) belirtilmelidir.");
             
-            var suggestion = _aiService.GetExerciseSuggestion(goal, level);
-            return Ok(new { Goal = goal, Level = level, Suggestion = suggestion });
+            var suggestion = await _aiService.GetExerciseSuggestionAsync(goal, level, notes);
+            return Ok(new { Goal = goal, Level = level, Notes = notes, Suggestion = suggestion });
         }
     }
 }

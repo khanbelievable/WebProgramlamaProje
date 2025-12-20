@@ -29,14 +29,19 @@
                     </select>
                 </div>
 
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Kişisel Notlar / Özel İstekler</label>
+                    <textarea id="notes" class="form-control" rows="3" placeholder="Örn: Bel fıtığım var, sadece evde çalışabilirim, dizlerimi zorlamasın..."></textarea>
+                </div>
+
                 <div class="d-grid mb-4">
-                    <button id="getSuggestion" class="btn btn-info text-white btn-lg">Öneriyi Getir</button>
+                    <button id="getSuggestion" class="btn btn-info text-white btn-lg">🤖 AI Öneri Oluştur</button>
                 </div>
 
                 <div id="resultCard" class="card bg-light d-none">
                     <div class="card-body">
                         <h5 class="card-title text-info"><i class="bi bi-lightbulb"></i> Önerilen Plan:</h5>
-                        <p id="suggestionText" class="card-text lead"></p>
+                        <div id="suggestionText" class="card-text lead" style="white-space: pre-line;"></div>
                     </div>
                 </div>
             </div>
@@ -46,20 +51,23 @@
 
 @section Scripts {
     <script>
-        document.getElementById('getSuggestion').addEventListener('click', function() {
+        document.getElementById('getSuggestion').addEventListener('click', async function() {
             const goal = document.getElementById('goal').value;
             const level = document.getElementById('level').value;
+            const notes = document.getElementById('notes').value;
             
-            fetch(`/api/WorkoutSuggestions?goal=${encodeURIComponent(goal)}&level=${encodeURIComponent(level)}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('suggestionText').innerText = data.suggestion;
-                    document.getElementById('resultCard').classList.remove('d-none');
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Öneri alınırken bir hata oluştu.');
-                });
+            const suggestionText = document.getElementById('suggestionText');
+            suggestionText.innerHTML = '<div class="text-center"><div class="spinner-border text-info"></div><p class="mt-2">AI planınızı hazırlıyor...</p></div>';
+            document.getElementById('resultCard').classList.remove('d-none');
+            
+            try {
+                const response = await fetch(`/api/WorkoutSuggestions?goal=${encodeURIComponent(goal)}&level=${encodeURIComponent(level)}&notes=${encodeURIComponent(notes)}`);
+                const data = await response.json();
+                suggestionText.innerText = data.suggestion;
+            } catch (error) {
+                console.error('Error:', error);
+                suggestionText.innerHTML = '<div class="alert alert-danger">Öneri alınırken bir hata oluştu.</div>';
+            }
         });
     </script>
 }
