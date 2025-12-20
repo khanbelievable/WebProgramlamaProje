@@ -47,8 +47,8 @@ namespace WebProgramlamaProje.Data
             // Seed Gyms
             var gyms = new Gym[]
             {
-                new Gym { Name = "Sakarya Fitness Center", Address = "Serdivan, Sakarya", PhoneNumber = "0264 211 0000" },
-                new Gym { Name = "Elite Yoga Studio", Address = "Mavi Durak, Sakarya", PhoneNumber = "0264 211 0001" }
+                new Gym { Name = "Sakarya Fitness Center", Address = "Serdivan, Sakarya", PhoneNumber = "0264 211 0000", WorkingHours = "08:00 - 23:00" },
+                new Gym { Name = "Elite Yoga Studio", Address = "Mavi Durak, Sakarya", PhoneNumber = "0264 211 0001", WorkingHours = "09:00 - 21:00" }
             };
             foreach (Gym g in gyms)
             {
@@ -72,8 +72,8 @@ namespace WebProgramlamaProje.Data
             // Seed Trainers
             var trainers = new Trainer[]
             {
-                new Trainer { Name = "Ahmet Yılmaz", Specialty = "Vücut Geliştirme", Description = "10 yıl deneyimli eğitmen", GymId = gyms[0].Id },
-                new Trainer { Name = "Ayşe Kaya", Specialty = "Yoga", Description = "Sertifikalı yoga eğitmeni", GymId = gyms[1].Id }
+                new Trainer { Name = "Ahmet Yılmaz", Specialty = "Vücut Geliştirme", Description = "10 yıl deneyimli eğitmen", GymId = gyms[0].Id, ExperienceYears = 10, Availability = "Pazartesi-Cuma 09:00-18:00" },
+                new Trainer { Name = "Ayşe Kaya", Specialty = "Yoga", Description = "Sertifikalı yoga eğitmeni", GymId = gyms[1].Id, ExperienceYears = 5, Availability = "Hafta sonu 10:00-16:00" }
             };
             foreach (Trainer t in trainers)
             {

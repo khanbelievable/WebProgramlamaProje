@@ -11,8 +11,8 @@ using WebProgramlamaProje.Data;
 namespace WebProgramlamaProje.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251220135951_InitialCreateSqlite")]
-    partial class InitialCreateSqlite
+    [Migration("20251220184212_InitialSqlite")]
+    partial class InitialSqlite
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -226,7 +226,6 @@ namespace WebProgramlamaProje.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("AppointmentDate")
@@ -276,6 +275,9 @@ namespace WebProgramlamaProje.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("WorkingHours")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Gyms");
@@ -312,9 +314,15 @@ namespace WebProgramlamaProje.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Availability")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("ExperienceYears")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("GymId")
                         .HasColumnType("INTEGER");
@@ -392,9 +400,7 @@ namespace WebProgramlamaProje.Data.Migrations
                 {
                     b.HasOne("WebProgramlamaProje.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("WebProgramlamaProje.Models.Service", "Service")
                         .WithMany()

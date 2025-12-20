@@ -47,7 +47,7 @@ namespace WebProgramlamaProje.Controllers
         // POST: Gyms/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,ImageUrl")] Gym gym)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,WorkingHours,ImageUrl")] Gym gym)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace WebProgramlamaProje.Controllers
         // POST: Gyms/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,ImageUrl")] Gym gym)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,WorkingHours,ImageUrl")] Gym gym)
         {
             if (id != gym.Id) return NotFound();
 

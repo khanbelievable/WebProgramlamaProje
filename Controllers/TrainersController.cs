@@ -49,7 +49,7 @@ namespace WebProgramlamaProje.Controllers
         // POST: Trainers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Specialty,Description,ImageUrl,GymId")] Trainer trainer)
+        public async Task<IActionResult> Create([Bind("Id,Name,Specialty,Description,ImageUrl,GymId,ExperienceYears,Availability")] Trainer trainer)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace WebProgramlamaProje.Controllers
         // POST: Trainers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Specialty,Description,ImageUrl,GymId")] Trainer trainer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Specialty,Description,ImageUrl,GymId,ExperienceYears,Availability")] Trainer trainer)
         {
             if (id != trainer.Id) return NotFound();
 

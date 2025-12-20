@@ -20,6 +20,12 @@ namespace WebProgramlamaProje.Models
         [Display(Name = "Eğitmen Görseli")]
         public string? ImageUrl { get; set; }
 
+        [Display(Name = "Deneyim (Yıl)")]
+        public int ExperienceYears { get; set; }
+
+        [Display(Name = "Müsaitlik")]
+        public string? Availability { get; set; }
+
         [Display(Name = "Çalıştığı Salon")]
         public int GymId { get; set; }
         public Gym? Gym { get; set; }

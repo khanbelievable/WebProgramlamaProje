@@ -17,6 +17,9 @@ namespace WebProgramlamaProje.Models
         [Display(Name = "Telefon")]
         public string PhoneNumber { get; set; }
 
+        [Display(Name = "Çalışma Saatleri")]
+        public string? WorkingHours { get; set; }
+
         [Display(Name = "Salon Görseli")]
         public string? ImageUrl { get; set; }
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebProgramlamaProje.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateSqlite : Migration
+    public partial class InitialSqlite : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,6 +61,7 @@ namespace WebProgramlamaProje.Data.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    WorkingHours = table.Column<string>(type: "TEXT", nullable: true),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -200,6 +201,8 @@ namespace WebProgramlamaProje.Data.Migrations
                     Specialty = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    ExperienceYears = table.Column<int>(type: "INTEGER", nullable: false),
+                    Availability = table.Column<string>(type: "TEXT", nullable: true),
                     GymId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -219,7 +222,7 @@ namespace WebProgramlamaProje.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ApplicationUserId = table.Column<string>(type: "TEXT", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "TEXT", nullable: true),
                     TrainerId = table.Column<int>(type: "INTEGER", nullable: false),
                     ServiceId = table.Column<int>(type: "INTEGER", nullable: false),
                     AppointmentDate = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -233,8 +236,7 @@ namespace WebProgramlamaProje.Data.Migrations
                         name: "FK_Appointments_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Appointments_Services_ServiceId",
                         column: x => x.ServiceId,
