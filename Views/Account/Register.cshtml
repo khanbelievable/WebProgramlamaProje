@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card mt-5">
+            <div class="card-header bg-success text-white text-center">
+                <h4>Kayıt Ol</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Register" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-3">
+                        <label class="control-label">Ad Soyad</label>
+                        <input name="fullName" class="form-control" required />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="control-label">E-posta</label>
+                        <input name="email" class="form-control" type="email" required />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="control-label">Şifre</label>
+                        <input name="password" class="form-control" type="password" required />
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-success px-4">Kaydol</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                Zaten hesabınız var mı? <a asp-action="Login">Giriş Yap</a>
+            </div>
+        </div>
+    </div>
+</div>

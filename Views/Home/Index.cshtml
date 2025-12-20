@@ -1,8 +1,38 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Ana Sayfa";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Hoş Geldiniz</h1>
+    <p>Premium Fitness Deneyimine Hazır Mısınız?</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Spor Salonlarımız</h5>
+                <p class="card-text">En yakın salonu bulun ve hemen başlayın.</p>
+                <a asp-controller="Gyms" asp-action="Index" class="btn btn-primary">Salonları Gör</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Eğitmenlerimiz</h5>
+                <p class="card-text">Uzman eğitmenlerimizle hedeflerinize ulaşın.</p>
+                <a asp-controller="Trainers" asp-action="Index" class="btn btn-primary">Eğitmenleri Gör</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Randevu Al</h5>
+                <p class="card-text">Hemen uygun bir saat seçin ve yerinizi ayırtın.</p>
+                <a asp-controller="Appointments" asp-action="Index" class="btn btn-success">Randevu Al</a>
+            </div>
+        </div>
+    </div>
 </div>
